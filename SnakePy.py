@@ -1,5 +1,6 @@
 import time
 import random
+import threading
 
 class Snake:
     def __init__(self, size, speed, boardWidth, boardHight):
@@ -7,8 +8,7 @@ class Snake:
         self.speed = speed
         self.boardHight = boardHight
         self.boardWidth = boardWidth
-        self.snakeArray = [[18, 3], [19, 3], [20, 3], [21, 3], [22, 3], [23, 3]]
-        # self.snakeArray = [[2,3],[3,3],[4,3],[5,3],[6,3]]
+        self.snakeArray = [[2,3],[3,3],[4,3],[5,3],[6,3]]
         self.direction = "front"
         self.directionBuffer = ""
         self.target = [8, 3]
@@ -100,7 +100,7 @@ class Snake:
     def detectDealth(self):
         if self.snakeArray.count(self.snakeArray[-1]) == 2:
             return True
-        elif self.snakeArray[-1][0] == 0 or self.snakeArray[-1][0] == self.boardWidth:
+        elif self.snakeArray[-1][0] == 0 or self.snakeArray[-1][0] == self.boardWidth - 1 :
             return True
         elif self.snakeArray[-1][1] == 0 or self.snakeArray[-1][1] == self.boardHight - 1 :
             return True
@@ -109,12 +109,18 @@ class Snake:
     
 
 
-snake = Snake (4, 5, 30, 15)
-
-while(1):
-    snake.printBoard()
-    direction = input ("")
-    snake.moveSnake(direction)
 
 
 
+
+
+def main():
+    snake = Snake (4, 5, 30, 15)
+
+    while(1):
+        snake.printBoard()
+        direction = input ("")
+        snake.moveSnake(direction)
+
+if __name__ == "__main__":
+    main()
